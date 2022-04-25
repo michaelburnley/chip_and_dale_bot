@@ -1,15 +1,16 @@
-const { App } = require('@slack/bolt');
+import { App } from '@slack/bolt';
+import config from './config';
 
 const app = new App({
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-  token: process.env.SLACK_BOT_TOKEN,
+  signingSecret: config.env.signing_secret,
+  token: config.env.bot_token,
 });
 
 /* Add functionality here */
 
 (async () => {
   // Start the app
-  await app.start(process.env.PORT || 3000);
+  await app.start(config.env.port || 3000);
 
-  console.log('⚡️ Bolt app is running!');
+  config.log.info('⚡️ Bolt app is running!');
 })();
