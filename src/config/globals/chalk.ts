@@ -3,7 +3,8 @@ const log = console.log;
 
 const createLog = (text: string, color: string = "blue"): any => {
     // @ts-ignore
-    log(chalk[color](text));
+    const chalked = chalk[color] as any;
+    log(chalked(text));
 }
 
 export default {
