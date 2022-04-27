@@ -12,7 +12,7 @@ export default {
         response_type: process.env.NOTION_RESPONSE_TYPE,
         owner: process.env.NOTION_OWNER,
         token: process.env.NOTION_TOKEN,
-        pages: {
+        database: {
             roadmap: process.env.NOTION_ROADMAP_ID,
         }
     },

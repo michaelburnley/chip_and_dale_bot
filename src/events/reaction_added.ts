@@ -2,7 +2,11 @@ import * as _ from 'lodash';
 import config from '../config';
 
 export default async (event: any, client: any) => {
-    const reaction = await config.sequelize.models.SlackEmoji.findOne({ where: { id: event.reaction }, raw: true }) as any;
+    const reaction = await config.sequelize.models.SlackEmoji.findOne({
+        where: { id: event.reaction },
+        raw: true
+    }) as any;
+
     if (!reaction) return;
 
     const item = await config.sequelize.models.SlackChannel.findOne({
@@ -16,7 +20,6 @@ export default async (event: any, client: any) => {
 
     const full_message = await client.conversations.replies({
         channel: item.id,
-        // @ts-ignore
         ts: event.item.ts,
     });
 
@@ -27,7 +30,6 @@ export default async (event: any, client: any) => {
         channel: reaction.channelId,
         unfurl_links: false,
         unfurl_media: false,
-        // @ts-ignore
         text: chat_text,
         blocks: [
             {

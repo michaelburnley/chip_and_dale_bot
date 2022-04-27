@@ -4,6 +4,8 @@ import reaction_added from './events/reaction_added';
 import endpoints from './endpoints';
 import syncModels from './config/syncModels';
 import syncChannels from './helpers/syncChannels';
+import syncNotionDB from './helpers/syncNotionDB';
+import syncNotionDBProps from './helpers/syncNotionDBProps';
 
 const app = new App({
   signingSecret: config.env.slack.signing_secret,
@@ -28,6 +30,9 @@ app.event('reaction_added', async ({ event, client }) => {
     config.log.info('⚡️ Connection to DB successful!');
     syncModels();
     syncChannels(app.client);
+    await syncNotionDB();
+    await syncNotionDBProps();
+
   } catch (error) {
     config.log.error(`Unable to connect to the database: ${error}`);
   }
