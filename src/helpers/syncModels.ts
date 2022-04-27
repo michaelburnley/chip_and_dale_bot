@@ -1,6 +1,6 @@
-import sequelize from "./globals/sequelize";
-import chalk from "./globals/chalk";
-import models from './models';
+import sequelize from "../config/globals/sequelize";
+import chalk from "../config/globals/chalk";
+import models from '../config/models';
 import { ModelAttributes, ModelOptions } from 'sequelize/types'
 
 export default () => {
@@ -18,5 +18,5 @@ export default () => {
     }
 
     sequelize.sync();
-    chalk.info(`Synced ${tables.length} tables: ${tables}`)
+    chalk.info(`💡 Synced ${tables.length} tables: ${tables}`)
 }

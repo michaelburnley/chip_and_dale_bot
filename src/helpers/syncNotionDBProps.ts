@@ -53,7 +53,7 @@ export default async () => {
                 `notion_db_id`,
             ],
         });
-        config.log.info(`Finished syncing Notion DB Properties`);
+        config.log.info(`📚 Finished syncing Notion DB Properties`);
     } catch (err) {
         config.log.error(`Failed to sync Notion DB Properties: ${err}`);
     }

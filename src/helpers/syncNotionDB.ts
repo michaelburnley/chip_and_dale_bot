@@ -43,7 +43,7 @@ export default async () => {
                 `archived`,
             ],
         });
-        config.log.info(`Finished syncing Notion DBs`);
+        config.log.info(`📚 Finished syncing Notion DBs`);
     } catch (err) {
         config.log.error(`Failed to sync Notion DBs: ${err}`);
     }
