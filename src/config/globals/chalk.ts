@@ -8,6 +8,7 @@ const createLog = (text: string, color: string = "blue"): any => {
 }
 
 export default {
+    success: (text: string) => createLog(text, "green"),
     error: (text: string) => createLog(text, "red"),
     info: (text: string) => createLog(text),
     warning: (text: string) => createLog(text, "yellow"),
