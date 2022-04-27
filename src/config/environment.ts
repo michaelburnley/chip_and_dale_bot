@@ -16,5 +16,13 @@ export default {
             roadmap: process.env.NOTION_ROADMAP_ID,
         }
     },
+    db: {
+        host: process.env.DB_HOST,
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DATABASE,
+        port: process.env.DB_PORT,
+        dialect: process.env.DB_DIALECT,
+    },
     port: process.env.SLACK_PORT,
 }
