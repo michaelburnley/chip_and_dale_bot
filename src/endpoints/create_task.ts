@@ -50,7 +50,8 @@ export default async (req: any, res: any) => {
 
     if (!has_type) return;
 
-    const [type] = has_type;
+    const [type_raw] = has_type;
+    const type = _.replace(type_raw, ':', '');
 
     const title = _.replace(_.replace(task_name, `[${description}]`, ''), `:${type}:`, '');
 
