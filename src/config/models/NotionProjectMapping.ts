@@ -15,6 +15,10 @@ const definition = {
         type: DataTypes.ENUM('nightshift', 'youtube'),
         defaultValue: 'nightshift',
     },
+    type: {
+        type: DataTypes.ENUM(`task`, `discussion`, `document`),
+        defaultValue: `task`
+    }
 };
 
 const options = {
