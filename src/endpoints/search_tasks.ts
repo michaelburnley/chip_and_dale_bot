@@ -23,6 +23,7 @@ export default async (req: any, res: any) => {
     const body = req.body;
     let message;
 
+    // console.log(body);
     const [project, ...rest] = _.split(req.body.text, ' ');
     const query_text = _.join(rest, ' ');
 
@@ -88,32 +89,16 @@ export default async (req: any, res: any) => {
                 "type": "mrkdwn",
                 "text": `*<${url}|${title}>*\nType: ${type}\nStatus: ${status}\nCreated: ${created_time}`
             },
-            // "accessory": {
-            //     "type": "button",
-            //     "text": {
-            //         "type": "plain_text",
-            //         "text": `Select`,
-            //     },
-            //     "value": url,
-            //     "action_id": "button-action"
-            // }
-        }
-        const context =
-        {
-            "type": "context",
-            "elements": [
-                {
-                    "type": "image",
-                    "image_url": "https://api.slack.com/img/blocks/bkb_template_images/tripAgentLocationMarker.png",
-                    "alt_text": "Location Pin Icon"
-                },
-                {
+            "accessory": {
+                "type": "button",
+                "text": {
                     "type": "plain_text",
-                    "emoji": true,
-                    "text": "Location: Central Business District"
-                }
-            ]
-        };
+                    "text": `Select`,
+                },
+                "value": JSON.stringify({ url, response_url: body.response_url }),
+                "action_id": "button-action"
+            }
+        }
 
         items.push(divider, section);
 

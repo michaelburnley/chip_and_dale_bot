@@ -6,6 +6,7 @@ import axios from 'axios';
 import notion from "../config/globals/notion";
 import sequelize from "../config/globals/sequelize";
 import chalk from "../config/globals/chalk";
+import sendMessage from '../helpers/sendMessage';
 
 const description_regex = /\[(.*?)\]/;
 const type_regex = /\:epic|issue|task\:/;
@@ -119,10 +120,10 @@ export default async (req: any, res: any) => {
         } as any)
         chalk.success(`Successfully imported "${title}" to ${project} tasks.`);
 
-        await axios.post(req.body.response_url, {
+        await sendMessage(req.body.response_url, {
             text: `Created task "${title}" for ${project}: ${created.url}`,
             response_type: `ephemeral`
-        });
+        })
     } catch (err) {
         chalk.error(`Failed to import "${title}" to ${project}: ${err}`);
 
