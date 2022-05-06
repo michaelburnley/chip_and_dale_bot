@@ -1,4 +1,3 @@
-import { App } from '@slack/bolt';
 import config from './config';
 import reaction_added from './events/reaction_added';
 import endpoints from './endpoints';
@@ -6,11 +5,7 @@ import syncModels from './helpers/syncModels';
 import syncChannels from './helpers/syncChannels';
 import syncNotionDB from './helpers/syncNotionDB';
 import syncNotionDBProps from './helpers/syncNotionDBProps';
-
-const app = new App({
-  signingSecret: config.env.slack.signing_secret,
-  token: config.env.slack.bot_token,
-});
+import app from './config/globals/bolt';
 
 app.event('reaction_added', async ({ event, client }) => {
   await reaction_added(event, client);

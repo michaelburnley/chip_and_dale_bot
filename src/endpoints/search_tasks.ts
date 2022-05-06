@@ -8,12 +8,6 @@ import axios from 'axios';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 
-// const type_mapping = {
-//     issue: `Bug 🐞`,
-//     epic: `Epic ⛰️`,
-//     task: `Task 🔨`
-// }
-
 const description_regex = /\[(.*?)\]/;
 const type_regex = /\:document|discussion|task\:/;
 
@@ -21,9 +15,7 @@ export default async (req: any, res: any) => {
     res.status(200).send();
 
     const body = req.body;
-    let message;
 
-    // console.log(body);
     const [project, ...rest] = _.split(req.body.text, ' ');
     const query_text = _.join(rest, ' ');
 
@@ -52,8 +44,6 @@ export default async (req: any, res: any) => {
 
 
     const clean_query_text = _.replace(query_text, `:${type}:`, '');
-
-    // /find nightshift :task; search_text
 
     const all_items = await notion.databases.query({
         database_id: project_mapping.notion_id,
@@ -106,7 +96,7 @@ export default async (req: any, res: any) => {
 
     const text = `Search for "${clean_query_text}"`;
 
-    const modal = await axios.post(`https://slack.com/api/views.open`,
+    await axios.post(`https://slack.com/api/views.open`,
         {
             "trigger_id": body.trigger_id,
             "view": {
@@ -172,18 +162,4 @@ export default async (req: any, res: any) => {
             }
         }
     );
-
-    // console.log(JSON.stringify(all_items.results));
-    // console.log(JSON.stringify(modal.data));
-    // try {
-
-    // } catch (err) {
-    //     chalk.error(`Unable to search tasks: ${err}`);
-    //     message = `Notion search failed for ${body.text}. Try again later.`
-    // }
-
-    // await axios.post(body.response_url, {
-    //     text: message,
-    //     response_type: `ephemeral`
-    // })
 }

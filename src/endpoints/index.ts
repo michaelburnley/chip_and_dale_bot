@@ -4,6 +4,7 @@ import config from '../config';
 import create_task from './create_task';
 import search_tasks from './search_tasks';
 import button_respond from './button_respond';
+import send_changelist from './send_changelist';
 
 export default () => {
     const app = express()
@@ -15,6 +16,7 @@ export default () => {
     app.post('/create_task', create_task)
     app.post('/search_notion', search_tasks);
     app.post('/button_respond', button_respond);
+    app.post('/send_changelist', send_changelist);
 
     app.listen(port, () => {
         config.log.info(`⚡️ Endpoints up on port ${port}!`);
